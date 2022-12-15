@@ -1,0 +1,45 @@
+﻿@model vampsdemo.Models.Data_model.user_details
+
+<div>
+    <form id="myForm">
+        @Html.HiddenFor(m => m.user_id)
+
+        @Html.TextBoxFor(m => m.firstname, new { @class = "form-control", @placeholder = "Firstname" })
+        @Html.ValidationMessageFor(m => m.firstname, "", new { @class = "text-danger" })
+
+        @Html.TextBoxFor(m => m.lastname, new { @class = "form-control", @placeholder = "Lastname" })
+        @Html.ValidationMessageFor(m => m.lastname, "", new { @class = "text-danger" })
+
+        @Html.TextBoxFor(m => m.phonenumber, new { @class = "form-control", @placeholder = "Phone" })
+        @Html.ValidationMessageFor(m => m.phonenumber, "", new { @class = "text-danger" })
+
+        @Html.TextBoxFor(m => m.email, new { @class = "form-control", @placeholder = "Email" })
+        @Html.ValidationMessageFor(m => m.email, "", new { @class = "text-danger" })
+
+        @Html.TextBoxFor(m => m.birthdate, new { @class = "form-control", @placeholder = "BirthDate" })
+        @Html.ValidationMessageFor(m => m.birthdate, "", new { @class = "text-danger" })
+       @* @Html.TextBoxFor(m => m.password, new { @class = "form-control", @placeholder = "Password", @readonly = "readonly", @hidden = "hidden" })
+       *@ @Html.HiddenFor(m => m.password)
+
+        <a href="#" id="Editbtn" class="btn btn-success btn-block">Update</a>
+    </form>
+</div>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#Editbtn").click(function () {
+            debugger
+            var myformdata = $("#myForm").serialize();
+            $.ajax({
+                type: "POST",
+                url: "/Home/Edit",
+                data: myformdata,
+                success: function () {
+                    window.location.href = "/Home/HomePage";
+                }
+            })
+        })
+    })
+</script>
+

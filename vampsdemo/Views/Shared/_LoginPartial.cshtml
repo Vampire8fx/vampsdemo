@@ -1,0 +1,55 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        @if (Session["userId"] != null)
+        {
+            <li>@Session["FullName"]</li>
+            <li>@Html.ActionLink("Logout", "Logout", "Home", routeValues: null, htmlAttributes: new { id = "logountlink" })</li>
+        }
+        else
+        {
+            <li>
+                <a  href="#" onclick="Regiter()" >Register</a>
+            </li>
+            <li>
+               <a  href="#" onclick="Login()" >Login</a>
+            </li>
+        }
+
+    </ul>
+    
+   }
+ 
+@*<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script type="text/javascript">
+    function Regiter() {
+        var url = "/Home/Register";
+        debugger
+        $("#myModalBodyDiv1").load(url, function () {
+            $("#myModal1").modal("show");
+        })
+    }
+    function Login() {
+        var url = "/Home/Login";
+        debugger
+        $("#dvPartial").load(url, function () {
+            $("#MyPopup").modal("show");
+        })
+    }*@
+</script>

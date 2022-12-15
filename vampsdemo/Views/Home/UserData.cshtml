@@ -1,0 +1,100 @@
+﻿@model IEnumerable<vampsdemo.Models.Data_model.user_details>
+
+<p>
+
+</p>
+<div>
+    @ViewBag.errorMessage
+</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.user_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.firstname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lastname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.phonenumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.birthdate)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.user_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.firstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.phonenumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.birthdate)
+            </td>
+            <td>
+            <td>
+                <a class="btn btn-primary details" onclick="details(@item.user_id)">View</a>
+                <a href="#" class="btn btn-success" onclick="Edit(@item.user_id)"><i class="glyphicon glyphicon-pencil"></i> </a>
+                <a href="#" class="btn btn-danger" onclick="Delete(@item.user_id)"><i class="glyphicon glyphicon-trash"></i></a>
+            </td>
+        </tr>
+    }
+
+</table>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+<script>
+    //edit data
+    var Edit = function (user_id) {
+        debugger
+        var url = "/Home/AddEdit?user_id=" + user_id;
+        $("#myModalBodyDiv1").load(url, function () {
+            $("#myModal1").modal("show");
+        })
+    }
+    var details = function (user_id) {
+        debugger
+        var url = "/Home/UserProfile?user_id=" + user_id;
+        $("#dvPartial").load(url, function () {
+            $("#MyPopup").modal("show");
+        })
+    }
+    //delete data
+    function Delete(user_id) {
+        if (confirm("are you sure to delete this records..?")) {
+            debugger
+            $.ajax({
+                type: 'post',
+                url: "/Home/delete?id=" + user_id,
+                datatype: 'Json',
+                success: function (responce) {
+                    if (responce == "success") {
+                        alert("Data Deleted successfully!");
+                        $("#Admin").load("/Home/UserData");
+                    }
+                }
+            })
+        }
+    }
+</script>

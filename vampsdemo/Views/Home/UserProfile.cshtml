@@ -1,0 +1,24 @@
+﻿@model vampsdemo.Models.Data_model.user_details
+
+<div class="row">
+    <div class="col-lg-2"><label>Id</label></div>
+    <div class="col-lg-10">@Model.user_id</div>
+</div>
+<div class="row">
+    <div class="col-lg-2"><label>Name</label></div>
+    <div class="col-lg-10">@Model.firstname @Model.lastname </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-2"><label>Phone</label></div>
+    <div class="col-lg-10">@Model.phonenumber</div>
+</div>
+
+<div class="row">
+    <div class="col-lg-2"><label>EmailID</label></div>
+    <div class="col-lg-10">@Model.email</div>
+</div>
+<div class="row">
+    <div class="col-lg-2"><label>BirthDate</label></div>
+    <div class="col-lg-10">@Model.birthdate</div>
+</div>

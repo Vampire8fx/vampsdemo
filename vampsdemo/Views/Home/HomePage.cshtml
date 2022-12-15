@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "HomePage";
+}
+<body>
+    <div>
+        @if (Session["Role1"] != null)
+        {
+            <div id="Admin">            
+            </div>
+        }
+        else if (Session["Role2"] != null)
+        {
+            <div>
+                @Html.Partial("UserInfo")
+            </div>
+        }
+        else if (Session["Role3"] != null)
+        {
+            <div>
+                @Html.Partial("stProfile")
+            </div>
+}
+else
+            {
+                <h1><strong>You need to Login first :)</strong></h1>
+            }
+    </div>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            debugger
+            $('#Admin').load('/Home/UserData');
+            });
+       @* $("#form").validate({
+            rules: {
+                EmpName: "required",
+                ddlEmpGender: "required",
+                ddlEmpCountry: "required",
+                ddlEmpState: "required",
+                Password:
+                {
+                    minlength: 5
+                },
+                ConfirmPassword: {
+                    minlength: 5,
+                    equalTo: '[name="Password"]'
+                },
+            },
+            messages: {
+                ddlEmpGender: "Please select Gender",
+                ddlEmpCountry: "Please select Country",
+                ddlEmpState: "Please select State",
+                Password: "Please enter atleast 5 digit Password",
+                ConfirmPassword: "Password and Confirm Password do not match",
+                EmpName: "Employee Name is required"
+            },
+        }
+        );
+        function validate() {
+            var email = $("#emailid").val();
+            var emailreg = new regexp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+            var valid = emailreg.test(email);
+            if (email == "") {
+                $("#div1").text("please enter an email");
+            }
+            else if (!valid) {
+                $("#div1").text(" email is not valid");
+            }
+
+            var Phonenumber = $("#Phone").val();
+            var filter = /^[0-9-+]+$/;
+            if (!(filter.test(Phonenumber))) {
+                $("#div2").text("Please enter valid Phone Number");
+            }
+        }*@
+    </script>
+</body>

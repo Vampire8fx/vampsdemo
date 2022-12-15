@@ -1,0 +1,43 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Profile</title>
+</head>
+<body>
+    <h2>UserView</h2>
+
+    <div>
+        <h4>displayusers</h4>
+        <hr />
+        @if (Session["userId"] != null)
+        {
+            <dl class="dl-horizontal">
+                <dt>
+                    @Session["FullName"].ToString();
+                </dt>
+                <dt>
+                    @Session["Phone"].ToString();
+                </dt>
+
+                <dt>
+                    @Session["Email"].ToString();
+                </dt>
+             
+                <dt>
+                    @Session["BirthDate"].ToString();
+                </dt>
+
+
+
+            </dl>
+        }
+    </div>
+</body>
+</html>

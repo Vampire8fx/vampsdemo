@@ -1,0 +1,66 @@
+﻿@model vampsdemo.Models.Data_model.user_details
+
+<body>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create" asp-controller="Home">
+
+
+                <div class="form-group">
+                    <label class="control-label"></label>
+                    <input id="id" value="@Model.user_id" class="form-control" readonly="readonly" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label"></label>
+                    <input value="@Model.firstname" id="fname" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label"></label>
+                    <input value="@Model.lastname" id="lname" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label"></label>
+                    <input value="@Model.phonenumber" id="phone" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label"></label>
+                    <input value="@Model.email" id="email" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Update" id="btnUpdate" class="btn btn-success btn-sm" />
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
+<script type="text/javascript" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
+<script type="text/javascript">
+
+    $("body").on("click", "#btnUpdate", function () {
+        debugger
+        var user = {};
+        user.user_id = $("#id").val();
+        user.fistname = $("#fname").val();
+        user.lastname = $("#lname").val();
+        user.phonenumber = $("#phone").val();
+        user.email = $("#email").val();
+        $.ajax({
+            type: "POST",
+            url: "/User/Updatedata",
+            data: "user:' " + JSON.stringify(user) + "'",
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            success: function () {
+                if (user != null) {
+                    alert("Customer record updated.");
+                } else {
+                    alert("Customer not found.");
+                }
+            }
+        });
+    });
+</script>

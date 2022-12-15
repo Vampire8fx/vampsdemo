@@ -1,0 +1,33 @@
+﻿@model vampsdemo.Models.Data_model.user_details
+
+<div>
+    <form>
+        @Html.HiddenFor(x => x.user_id)
+        @Html.TextBoxFor(model => model.firstname, new {@class ="form-control",@PlaceHolder = "Firstname"})
+        @Html.TextBoxFor(model => model.lastname, new {@class ="form-control",@PlaceHolder = "lastname"})
+        @Html.TextBoxFor(model => model.phonenumber, new {@class ="form-control",@PlaceHolder = "phone"})
+        @Html.TextBoxFor(model => model.email, new {@class ="form-control",@PlaceHolder = "email"})
+  
+        <a href="#" id="btnsubmit" class="btn btn-success btn-block"></a>
+    </form>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('btnsubmit').click(function () {
+            $('#loaderDiv').show();
+            var myfoormdata = $('#myform').serialize();
+            alert("success")
+            $.ajax({
+                type: "Post",
+                url: "/User/Index",
+                data: myformdata,
+                success: function()
+                {
+                    $("#loaderDiv").hide();
+                    $("#myModel").model("hide");
+                }
+            })                                 
+    })     
+     }
+</script>
